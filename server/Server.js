@@ -87,8 +87,12 @@ cron.schedule('0 0 * * *', async () => {
 app.use("/api/v1/users", userrouter)
 app.use("/api/v1/arena", arenarouter)
 
+app.get('/he', (req, res) => {
+    return res.status(200).send({ Message: "Hellow World" })
+})
 
-const port = process.env.PORT || 5000
+
+const port = process.env.PORT || 8000
 
 
 app.listen(port, () => {
