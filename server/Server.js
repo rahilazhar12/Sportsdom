@@ -20,9 +20,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 
-app.get('/get', (req, res) => {
-    res.send('hellow World')
-})
+
 
 
 
