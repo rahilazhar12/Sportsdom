@@ -17,7 +17,7 @@ const UserLogin = () => {
     const userData = { email, password };
 
     try {
-      const response = await fetch(`${urlapi}/api/v1/users/user-login`, {
+      const response = await fetch(`http://api.sportsdom.online/api/v1/users/user-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
@@ -37,7 +37,7 @@ const UserLogin = () => {
     }
   };
 
-  const User = json.pa
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500">
