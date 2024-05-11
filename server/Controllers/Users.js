@@ -19,7 +19,7 @@ const UserRegistration = async (req, res) => {
             return res.status(400).send({ message: "Email already exists in our records." });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = bcrypt.hash(password, 10);
 
         const newUser = new Userschema({
             name,
