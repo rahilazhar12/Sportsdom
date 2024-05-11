@@ -19,7 +19,7 @@ const UserRegistration = async (req, res) => {
             return res.status(400).send({ message: "Email already exists in our records." });
         }
 
-        const hashedPassword = bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new Userschema({
             name,
@@ -51,7 +51,7 @@ const UserLogin = async (req, res) => {
             return res.status(400).json({ error: "Invalid username or password" });
         }
 
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        const isPasswordCorrect = bcrypt.compare(password, user.password);
 
         if (!isPasswordCorrect) {
             return res.status(400).json({ error: "Invalid username or password" });
