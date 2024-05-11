@@ -20,6 +20,18 @@ dbConnection()
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    next(err);
+});
+
+app.use((err, req, res, next) => {
+    console.error(err); // Log error information to console or a file
+    res.status(500).send('Internal Server Error');
+});
+
+
+
 
 
 
