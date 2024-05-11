@@ -13,7 +13,11 @@ const Arenamodal = require('./Models/Arenamodal');
 
 // rest object 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173'  // Allow only requests from this origin
+  };
+  
+  app.use(cors(corsOptions));
 dotenv.config();
 
 dbConnection()
