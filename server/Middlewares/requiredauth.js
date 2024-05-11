@@ -8,7 +8,7 @@ const requireAuth = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decoded; // Add the decoded user info to the request object
         next(); // Move to the next middleware or controller
     } catch (error) {
@@ -25,7 +25,7 @@ const authenticateToken = (req, res, next) => {
 
     if (token == null) return res.sendStatus(401); // If there's no token, not authorized
 
-    jwt.verify(token, process.env.JWT_KEY, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
         if (err) return res.sendStatus(403); // Token is no longer valid
 
         // Attach the user object to the request
