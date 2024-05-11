@@ -14,10 +14,12 @@ const Arenamodal = require('./Models/Arenamodal');
 // rest object 
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:5173'  // Allow only requests from this origin
-  };
-  
-  app.use(cors(corsOptions));
+    origin: 'http://localhost:5173',  // Allow requests from this origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",  // Allowed methods
+    allowedHeaders: "Content-Type,Authorization"  // Allowed headers
+};
+
+app.use(cors(corsOptions));
 dotenv.config();
 
 dbConnection()
