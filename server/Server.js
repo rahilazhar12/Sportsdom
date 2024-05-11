@@ -8,6 +8,7 @@ const userrouter = require('./Routes/auth.routes');
 const arenarouter = require('./Routes/Arena.routes');
 const cron = require('node-cron');
 const Arenas = require('./Models/Arenamodal')
+const Arenamodal = require('./Models/Arenamodal');
 
 
 // rest object 
@@ -87,6 +88,19 @@ app.use("/api/v1/arena", arenarouter)
 
 app.get('/he', (req, res) => {
     return res.status(200).send({ Message: "Hellow World" })
+})
+
+app.get('/get', async (req, res) => {
+    try {
+        const Arena = await Arenamodal.find();
+        if (Arena.length > 0) {
+            return res.status(200).send(Arena);
+        } else {
+            return res.status(200).send({ Message: "No Arena Found" });
+        }
+    } catch (error) {
+        return res.status(500).send({ error: "Internal Server Error" });
+    }
 })
 
 
