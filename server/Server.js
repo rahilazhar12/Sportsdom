@@ -15,10 +15,11 @@ const Arenamodal = require('./Models/Arenamodal');
 const app = express();
 // CORS configuration
 const corsOptions = {
-    origin: 'http://localhost:5173'  // Allow only requests from this origin
-  };
-  
-  app.use(cors(corsOptions));
+    origin: ['http://localhost:5173', 'https://sportsdom.online']  // Allow requests from both these origins
+};
+
+app.use(cors(corsOptions));
+
 dotenv.config();
 
 dbConnection()
@@ -28,14 +29,14 @@ app.use('/uploads', express.static('uploads'));
 app.use((err, req, res, next) => {
     console.error(err.stack);
     next(err);
-  });
-
-  app.use((err, req, res, next) => {
-  console.error(err); // Log error information to console or a file
-  res.status(500).send('Internal Server Error');
 });
 
-  
+app.use((err, req, res, next) => {
+    console.error(err); // Log error information to console or a file
+    res.status(500).send('Internal Server Error');
+});
+
+
 
 
 
