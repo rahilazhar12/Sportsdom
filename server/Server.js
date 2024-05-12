@@ -87,18 +87,18 @@ cron.schedule('0 0 * * *', async () => {
 //     }
 // });
 
-cron.schedule('0 0 * * *', async () => {
-    console.log('Resetting all slots at midnight...');
-    try {
-        await Arenas.updateMany(
-            {},
-            { $set: { "slots.$[].reserved": false, "slots.$[].reservedBy": null } }
-        );
-        console.log('All slots have been reset successfully');
-    } catch (error) {
-        console.error('Failed to reset slots:', error);
-    }
-});
+// cron.schedule('0 0 * * *', async () => {
+//     console.log('Resetting all slots at midnight...');
+//     try {
+//         await Arenas.updateMany(
+//             {},
+//             { $set: { "slots.$[].reserved": false, "slots.$[].reservedBy": null } }
+//         );
+//         console.log('All slots have been reset successfully');
+//     } catch (error) {
+//         console.error('Failed to reset slots:', error);
+//     }
+// });
 
 
 app.use("/api/v1/users", userrouter)
