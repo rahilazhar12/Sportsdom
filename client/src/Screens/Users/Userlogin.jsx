@@ -17,7 +17,7 @@ const UserLogin = () => {
     const userData = { email, password };
 
     try {
-      const response = await fetch(`http://api.sportsdom.online/api/v1/users/user-login`, {
+      const response = await fetch(`https://api.sportsdom.online/api/v1/users/user-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
