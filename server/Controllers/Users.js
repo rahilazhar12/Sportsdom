@@ -51,7 +51,7 @@ const UserLogin = async (req, res) => {
             return res.status(400).json({ error: "Invalid username or password" });
         }
 
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
+        const isPasswordCorrect =  bcrypt.compare(password, user.password);
 
         if (!isPasswordCorrect) {
             return res.status(400).json({ error: "Invalid username or password" });
@@ -60,7 +60,7 @@ const UserLogin = async (req, res) => {
         // Generate a token
         const token = JWT.sign(
             { id: user._id, role: user.role, name: user.name },
-            process.env.JWT_SECRET,
+            process.env.JWT_KEY,
             { expiresIn: '7d' }
         );
 
