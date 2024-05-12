@@ -44,6 +44,56 @@ const ArenaGetonId = async (req, res) => {
     }
 }
 
+const addArenaPictures = async (req, res) => {
+    const { arenaId } = req.params;
+    if (req.files.length === 0) {
+        return res.status(400).send({ message: "No pictures provided." });
+    }
+
+    try {
+        const pictures = req.files.map(file => file.path); // Adjust according to your needs
+        const arena = await Arenamodal.findById(arenaId);
+
+        if (!arena) {
+            return res.status(404).send({ message: "Arena not found." });
+        }
+
+        // Update arena with new pictures
+        arena.pictures.push(...pictures);
+        await arena.save();
+
+        res.status(200).send({ message: "Pictures added successfully", pictures });
+    } catch (error) {
+        console.error("Error adding pictures:", error);
+        res.status(500).send({ message: "Failed to add pictures to Arena." });
+    }
+};
+
+
+const getArenaPictures = async (req, res) => {
+    const { arenaId } = req.params;
+
+    try {
+        const arena = await Arenamodal.findById(arenaId);
+
+        if (!arena) {
+            return res.status(404).send({ message: "Arena not found." });
+        }
+
+        // Assuming 'pictures' is the field where URLs are stored
+        const pictures = arena.pictures;
+        if (!pictures || pictures.length === 0) {
+            return res.status(404).send({ message: "No pictures available for this arena." });
+        }
+
+        res.status(200).send({ pictures });
+    } catch (error) {
+        console.error("Error retrieving pictures:", error);
+        res.status(500).send({ message: "Failed to retrieve pictures." });
+    }
+};
+
+
 
 
 const AddSlotsToArena = async (req, res) => {
@@ -236,4 +286,4 @@ const GetallArenas = async (req, res) => {
 
 
 
-module.exports = { ArenaRegistration, GetallArenas, AddSlotsToArena, ReserveSlot, ArenaGetonId , UpdateSlotReservation }
+module.exports = { ArenaRegistration, GetallArenas, AddSlotsToArena, ReserveSlot, ArenaGetonId , UpdateSlotReservation , addArenaPictures , getArenaPictures }

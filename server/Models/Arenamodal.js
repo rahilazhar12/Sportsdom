@@ -7,6 +7,7 @@ const ArenaSchema = new mongoose.Schema({
     closetime: { type: String },
     charges: { type: String },
     contact: { type: String },
+    pictures: [{ type: String }], // Array to store image URLs
     slots: [
         {
             day: { type: String, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
@@ -17,7 +18,6 @@ const ArenaSchema = new mongoose.Schema({
                 userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
                 userName: { type: String }
             },
-            imageUrl: { type: String }, // Field for image URL
             sport: { type: String, enum: ['Football', 'Cricket'] } // New field for sport type
         }
     ]
