@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import UserLogin from "../Screens/Users/Userlogin";
-import Dashboard from "../Screens/Dashboard/Dashboard";
+// import Dashboard from "../Screens/Dashboard/Dashboard";
 import ArenaForm from "../Screens/Arena/Arenaregister";
 import Allarena from "../Screens/Arena/Allarenas";
 import Arenadetails from "../Screens/Arena/Arenadetails";
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <UserLogin /> },
       { path: "register", element: <RegisterForm /> },
-      { path: "dashboard", element: <ProtectedRoute component={Dashboard} allowedRoles={["Admin", "User"]} /> },
+      // { path: "dashboard", element: <ProtectedRoute component={Dashboard} allowedRoles={["Admin", "User"]} /> },
       { path: "arena-register", element: <ProtectedRoute component={ArenaForm} allowedRoles={["Admin"]} /> },
       { path: "Arenas", element: <ProtectedRoute component={Allarena} allowedRoles={["Admin" , "User"]} /> },
       { path: "arenas/:id", element: <ProtectedRoute component={Arenadetails} allowedRoles={["Admin", "User"]} /> },
