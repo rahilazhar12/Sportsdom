@@ -34,7 +34,7 @@ function ArenaImages() {
                     images.map((image, index) => (
                         <div key={index} className="cursor-pointer">
                             <img
-                                src={`http://localhost:8000/${image}`}
+                                src={`api.sportsdom.online/${image}`}
                                 alt={`Arena Image ${index + 1}`}
                                 className="w-full h-64 object-cover rounded-lg"
                                 onClick={() => { setSelectedImage(image); setIsOpen(true); }}
@@ -49,7 +49,7 @@ function ArenaImages() {
             {isOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4">
                     <div className="bg-white p-2 rounded-lg max-w-full max-h-full overflow-auto">
-                        <img src={`http://localhost:8000/${selectedImage}`} alt="Selected Arena" className="max-w-full max-h-full"/>
+                        <img src={`api.sportsdom.online/${selectedImage}`} alt="Selected Arena" className="max-w-full max-h-full"/>
                         <button
                             onClick={() => setIsOpen(false)}
                             className="text-white bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded absolute top-2 right-2">
