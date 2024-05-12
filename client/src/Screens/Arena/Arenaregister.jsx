@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { urlapi } from '../../Components/Envroutes';
+import toast from 'react-hot-toast';
 
 
 
@@ -25,10 +26,10 @@ function ArenaForm() {
                 body: JSON.stringify(formData)
             });
             const data = await response.json();
-            alert(data.message);
+            toast.success(data.message);
         } catch (error) {
             console.error('Failed to submit form:', error);
-            alert('Failed to register arena.');
+            toast.error('Failed to register arena.');
         }
     };
     const handleInputChange = (e) => {

@@ -10,23 +10,29 @@ import ProtectedRoute from "../Components/ProtectedRoutes";
 import ErrorPage from "../Screens/Error/Errorpage";
 import Userinfo from "../Screens/Users/Userinfo";
 import RegisterForm from "../Screens/Users/Userregister";
+import Uploadarenaimages from "../Screens/Arena/Uploadarenaimages";
+import Arenaimages from "../Screens/Arena/Arenaimages";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "login", element: <UserLogin /> },
+      { path: "/", element: <UserLogin /> },
       { path: "register", element: <RegisterForm /> },
       // { path: "dashboard", element: <ProtectedRoute component={Dashboard} allowedRoles={["Admin", "User"]} /> },
       { path: "arena-register", element: <ProtectedRoute component={ArenaForm} allowedRoles={["Admin"]} /> },
+      { path: "upload-image/:id", element: <ProtectedRoute component={Uploadarenaimages} allowedRoles={["Admin" , "User"]} /> },
+      { path: "arena-images/:id", element: <ProtectedRoute component={Arenaimages} allowedRoles={["Admin" , "User"]} /> },
       { path: "Arenas", element: <ProtectedRoute component={Allarena} allowedRoles={["Admin" , "User"]} /> },
       { path: "arenas/:id", element: <ProtectedRoute component={Arenadetails} allowedRoles={["Admin", "User"]} /> },
       { path: "add-slots/:id", element: <ProtectedRoute component={SlotForm} allowedRoles={["Admin"]} /> },
-      { path: "/", element: <Userinfo/> },
+      { path: "/howtobook", element: <Userinfo/> },
       { path: "*", element: <ErrorPage /> },
     ],
   },
+
+ 
 ]);
 
 export default router;

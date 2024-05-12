@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FaWhatsapp } from 'react-icons/fa'; // Import the WhatsApp icon
 import { urlapi } from '../../Components/Envroutes';
+import toast from 'react-hot-toast';
 
 const Arenadetails = () => {
   const [arenaDetails, setArenaDetails] = useState(null);
@@ -20,7 +21,7 @@ const Arenadetails = () => {
 
   const reserveSlots = async (day) => {
     if (!whatsappMessageSent[day]) {
-        alert('Please send the WhatsApp message before reserving slots.');
+        toast.error('Please send the WhatsApp message before reserving slots.');
         return;
     }
 
@@ -28,7 +29,7 @@ const Arenadetails = () => {
     const slotIndices = selectedSlots[day] || [];
     for (let index of slotIndices) {
         if (!slotSports[day] || !slotSports[day][index]) {
-            alert('Please select a sport for each slot you wish to reserve.');
+            toast.error('Please select a sport for each slot you wish to reserve.');
             return;
         }
     }
