@@ -37,14 +37,6 @@ app.use((err, req, res, next) => {
 });
 
 
-
-
-
-
-
-
-
-
 // Helper function to get yesterday's day name in Pakistan format
 function getYesterdayDayName() {
     const today = new Date();

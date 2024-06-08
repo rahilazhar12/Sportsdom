@@ -15,9 +15,9 @@ router.post('/add-images/:arenaId', upload.array('pictures', 5), addArenaPicture
 router.get('/get-pictures/:arenaId', getArenaPictures);
 
 router.get('/get-arena-onid/:id', ArenaGetonId)
-router.post('/add-slots/:arenaId', AddSlotsToArena);
-router.post('/reserve-slot/:arenaId', requireAuth, authenticateToken, upload.single('image'), ReserveSlot);
-router.put('/update-reservation/:arenaId/:slotId', UpdateSlotReservation);
+router.post('/add-slots/:arenaId/:fieldId', AddSlotsToArena);
+router.post('/reserve-slot/:arenaId/:fieldId', requireAuth, authenticateToken, ReserveSlot);
+router.put('/update-reservation/:arenaId/:fieldId/:slotId', UpdateSlotReservation);
 router.get('/getarena', GetallArenas)
 
 
