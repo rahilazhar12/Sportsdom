@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       { path: "arena-images/:id", element: <ProtectedRoute component={Arenaimages} allowedRoles={["Admin" , "User"]} /> },
       { path: "Arenas", element: <ProtectedRoute component={Allarena} allowedRoles={["Admin" , "User"]} /> },
       { path: "arenas/:id", element: <ProtectedRoute component={Arenadetails} allowedRoles={["Admin", "User"]} /> },
-      { path: "add-slots/:id", element: <ProtectedRoute component={SlotForm} allowedRoles={["Admin"]} /> },
+      { path: "add-slots/:id/:fieldId", element: <ProtectedRoute component={SlotForm} allowedRoles={["Admin"]} /> },
       { path: "/howtobook", element: <Userinfo/> },
       { path: "*", element: <ErrorPage /> },
     ],

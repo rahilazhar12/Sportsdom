@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { urlapi } from '../../Components/Envroutes';
-
+import toast from 'react-hot-toast';
 
 function SlotForm() {
+  const { id, fieldId } = useParams(); // Assume you have both arenaId and fieldId from the route params
   const [slots, setSlots] = useState([]);
-  const { id } = useParams();
+  
+  useEffect(() => {
+    handleAddSlot(); // Automatically add slots on component mount
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const apiUrl = `${urlapi}/api/v1/arena/add-slots/${id}`;
+    const apiUrl = `${urlapi}/api/v1/arena/add-slots/${id}/${fieldId}`;
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -19,10 +23,15 @@ function SlotForm() {
         body: JSON.stringify({ slots })
       });
       const data = await response.json();
-      alert('Slots added successfully!');
+      if (response.ok) {
+        toast.success('Slots added successfully!');
+      } else {
+        toast.error(data.message);
+      }
       console.log(data);
     } catch (error) {
       console.error('Failed to add slots:', error);
+      toast.error('Failed to add slots.');
     }
   };
 
@@ -41,9 +50,9 @@ function SlotForm() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     for (let day of days) {
       for (let i = 0; i < 24; i++) {
-        let startTime = `${i % 12 === 0 ? 12 : i % 12}:00 ${i < 12 ? 'AM' : 'PM'}`;
-        let endTime = `${(i + 1) % 12 === 0 ? 12 : (i + 1) % 12}:00 ${(i + 1) < 12 ? 'AM' : 'PM'}`;
-        newSlots.push({ day, startTime, endTime });
+        let startTime = `${i < 10 ? '0' : ''}${i}:00`;
+        let endTime = `${i < 9 ? '0' : ''}${i + 1}:00`;
+        newSlots.push({ day, startTime, endTime, reserved: false });
       }
     }
     setSlots(newSlots);
@@ -99,7 +108,7 @@ function SlotForm() {
           onClick={handleAddSlot}
           className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded"
         >
-          Add Slot
+          Add Slots
         </button>
         <button
           type="submit"
